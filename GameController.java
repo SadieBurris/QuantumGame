@@ -28,9 +28,8 @@ public class GameController {
         frame.setVisible(true);
     }
 
-    public void play() {
-        draw();
-        String lastInput = input.nextLine().strip().toLowerCase();
+    public void play(String command) {
+        String lastInput = command.strip().toLowerCase();
         switch(lastInput) {
             case "n", "not", "x", "not gate": selectedGate = not; break;
             case "h", "hadamard", "hadamard gate", "h gate": selectedGate = hadamard; break;
@@ -43,7 +42,10 @@ public class GameController {
                     current.apply(selectedGate, Integer.parseInt(lastCoords[0]), Integer.parseInt(lastCoords[1]));
                 }
         }
-        play();
+    }
+
+    public String getSelectedGate() {
+        return selectedGate.equals(swap) ? "swap" : selectedGate.equals(not) ? "not" : selectedGate.equals(hadamard) ? "hadamard" : "error";
     }
 
     public QuantumGrid[] getGrids() {
@@ -67,6 +69,6 @@ public class GameController {
 
     public static void main(String[] args) {
         GameController game = new GameController();
-        game.play();
+        //game.play();
     }
 }
