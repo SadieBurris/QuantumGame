@@ -7,6 +7,7 @@ public class GameController {
     private String[] lastCoords;
     private Not not;
     private Hadamard hadamard;
+    private Swap swap;
     private Gate selectedGate;
 
     public GameController() {
@@ -15,6 +16,7 @@ public class GameController {
         input = new Scanner(System.in);
         not = new Not();
         hadamard = new Hadamard();
+        swap = new Swap();
         selectedGate = not;
     }
 
@@ -24,9 +26,14 @@ public class GameController {
         switch(lastInput) {
             case "n", "not", "x", "not gate": selectedGate = not; break;
             case "h", "hadamard", "hadamard gate", "h gate": selectedGate = hadamard; break;
+            case "swap", "s": selectedGate = swap; break;
             default: 
                 lastCoords = lastInput.split(" ");
-                current.apply(selectedGate, Integer.parseInt(lastCoords[0]), Integer.parseInt(lastCoords[1]));
+                if(selectedGate.equals(swap)) {
+                    current.apply2Qs(selectedGate, Integer.parseInt(lastCoords[0]), Integer.parseInt(lastCoords[1]), Integer.parseInt(lastCoords[2]), Integer.parseInt(lastCoords[3]));
+                } else {
+                    current.apply(selectedGate, Integer.parseInt(lastCoords[0]), Integer.parseInt(lastCoords[1]));
+                }
         }
         play();
     }
@@ -42,7 +49,7 @@ public class GameController {
         current.print();
         System.out.println("Game Over: " + current.equals(wanted));
         System.out.print("Gate: ");
-        System.out.println(selectedGate.equals(not) ? "Not" : "Hadamard");
+        System.out.println(selectedGate.equals(not) ? "Not" : selectedGate.equals(hadamard) ? "Hadamard" : "Swap");
         System.out.println();
     }
 

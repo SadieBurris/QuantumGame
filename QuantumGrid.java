@@ -14,6 +14,10 @@ public class QuantumGrid {
         grid[row][col] = gate.doOperation(grid[row][col]);
     }
 
+    public void apply2Qs(Gate gate, int row1, int col1, int row2, int col2) {
+        gate.doOperation(grid[row1][col1], grid[row2][col2]);
+    }
+
     public boolean equals(QuantumGrid other) {
         for(int row = 0; row < grid.length; row++) {
             for(int col = 0; col < grid[0].length; col++) {

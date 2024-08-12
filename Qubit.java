@@ -13,6 +13,10 @@ public class Qubit {
         return symbol;
     }
 
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     public static Qubit randomQubit() {
         int num = (int) (Math.random() * 4);
         switch(num) {
