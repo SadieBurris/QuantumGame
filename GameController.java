@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import javax.swing.JFrame;
 
 public class GameController {
     private QuantumGrid current;
@@ -9,6 +10,7 @@ public class GameController {
     private Hadamard hadamard;
     private Swap swap;
     private Gate selectedGate;
+    private JFrame frame;
 
     public GameController() {
         current = new QuantumGrid();
@@ -18,6 +20,12 @@ public class GameController {
         hadamard = new Hadamard();
         swap = new Swap();
         selectedGate = not;
+        frame = new JFrame("Quantum Game");
+        frame.setSize(600, 600);  
+        frame.add(new FrameDraw(this));
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+        frame.setVisible(true);
     }
 
     public void play() {
@@ -36,6 +44,10 @@ public class GameController {
                 }
         }
         play();
+    }
+
+    public QuantumGrid[] getGrids() {
+        return new QuantumGrid[]{current, wanted};
     }
 
     public void draw() {

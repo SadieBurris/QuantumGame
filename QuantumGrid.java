@@ -2,7 +2,7 @@ public class QuantumGrid {
     private Qubit[][] grid;
 
     public QuantumGrid() {
-        grid = new Qubit[5][5];
+        grid = new Qubit[3][3];
         for(int i = 0; i < grid.length; i++) {
             for(int j = 0; j < grid[0].length; j++) {
                 grid[i][j] = Qubit.randomQubit();
@@ -16,6 +16,10 @@ public class QuantumGrid {
 
     public void apply2Qs(Gate gate, int row1, int col1, int row2, int col2) {
         gate.doOperation(grid[row1][col1], grid[row2][col2]);
+    }
+
+    public Qubit get(int row, int col) {
+        return grid[row][col];
     }
 
     public boolean equals(QuantumGrid other) {
